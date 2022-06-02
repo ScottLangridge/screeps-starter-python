@@ -15,10 +15,16 @@ class Starter(Creep):
         if self.memory.mining:
             self.collect()
         else:
-            self.deposit()
+            if Game.spawns['Spawn1'].store.getFreeCapacity(RESOURCE_ENERGY) > 0:
+                self.fill_spawjn()
+            elif self.obj.room.controller.level < 2 or self.obj.room.controller.ticksToDowngrade < 1000:
+                self.upgrade_controller()
+            elif len(self.obj.room.find(FIND_MY_CONSTRUCTION_SITES)) > 0:
+                self.build()
+            else:
+                self.upgrade_controller()
 
     def decide_task(self):
-        print(self.name)
         if self.empty() and not self.memory.mining:
             self.obj.say('Mining')
             self.memory.mining = True
@@ -32,11 +38,27 @@ class Starter(Creep):
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
 
-    def deposit(self):
-        target = self.get_target()
+    def fill_spawn(self):
+        target = Game.spawns['Spawn1']
         code = self.obj.transfer(target, RESOURCE_ENERGY)
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
+
+    def upgrade_controller(self):
+        target = self.obj.room.controller
+        code = self.obj.transfer(target, RESOURCE_ENERGY)
+        if code == ERR_NOT_IN_RANGE:
+            self.obj.moveTo(target)
+
+    def build(self):
+        target = self.pos.findClosestByPath(FIND_MY_CONSTRUCTION_SITES)
+        code = self.obj.build(target)
+        if code == ERR_NOT_IN_RANGE:
+            self.obj.moveTo(target)
+
+    # todo Implement
+    def repair(self):
+        pass
 
     def get_target(self):
         spawn = Game.spawns['Spawn1']
