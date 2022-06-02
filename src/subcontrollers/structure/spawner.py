@@ -1,5 +1,7 @@
-from ...subcontrollers.creep.starter import Starter
 from ...defs import *
+from my_utils import get_creeps_of_role
+
+from subcontrollers.creep.starter import Starter
 
 
 class Spawner:
@@ -9,10 +11,14 @@ class Spawner:
 
     def run(self):
         if self.obj.spawning is None:
-            self._spawn_creep([MOVE, MOVE, WORK, CARRY, CARRY], Starter)
+            for role in [Starter]:
+                if len(get_creeps_of_role(role)) < role.SPAWN_CAP:
+                    self._spawn_creep(role.DEFAULT_BODY, Starter)
+
 
     def _spawn_creep(self, body, role):
         result = self.obj.spawnCreep(body, self._next_name(role), {'memory': role.DEFAULT_MEMORY})
+
 
     def _next_name(self, role):
         prefix = role.__name__ + '_'

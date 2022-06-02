@@ -3,13 +3,11 @@
 #  Game, etc. do exist.
 
 from defs import *
+from my_utils import *
 
 # These are currently required for Transcrypt in order to use the following names in JavaScript.
 # Without the 'noalias' pragma, each of the following would be translated into something like 'py_Infinity' or
 #  'py_keys' in the output file.
-from subcontrollers.creep.starter import Starter
-
-from subcontrollers.structure.spawner import Spawner
 
 __pragma__('noalias', 'name')
 __pragma__('noalias', 'undefined')
@@ -31,22 +29,6 @@ def memory_cleanup():
     for creep in Object.keys(Memory.creeps):
         if not (creep in Game.creeps):
             del Memory.creeps[creep]
-
-
-def get_spawners():
-    spawns = []
-    for spawn_name in Object.keys(Game.spawns):
-        spawns.append(Spawner(spawn_name))
-    return spawns
-
-
-def get_creeps():
-    creeps = []
-    for creep in Object.keys(Game.creeps):
-        prefix = creep.split('_')[0]
-        if prefix == 'Starter':
-            creeps.append(Starter(creep))
-    return creeps
 
 
 module.exports.loop = main

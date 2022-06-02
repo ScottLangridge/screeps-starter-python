@@ -1,6 +1,11 @@
 from ...defs import *
 
+
 class Creep:
+    SPAWN_CAP = 0
+    DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
+    DEFAULT_MEMORY = {}
+
     def __init__(self, name):
         self.name = name
         self.obj = Game.creeps[name]

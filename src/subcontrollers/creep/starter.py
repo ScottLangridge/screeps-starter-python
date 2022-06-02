@@ -3,6 +3,8 @@ from ...subcontrollers.creep.creep import Creep
 
 
 class Starter(Creep):
+    SPAWN_CAP = 5
+    DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
     DEFAULT_MEMORY = {'collecting': True}
 
     def __init__(self, name):
