@@ -3,7 +3,7 @@
 #  Game, etc. do exist.
 
 from defs import *
-from my_utils import *
+from utils import *
 
 # These are currently required for Transcrypt in order to use the following names in JavaScript.
 # Without the 'noalias' pragma, each of the following would be translated into something like 'py_Infinity' or
