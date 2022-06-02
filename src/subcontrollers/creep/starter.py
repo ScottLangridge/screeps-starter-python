@@ -15,7 +15,7 @@ class Starter(Creep):
         if self.memory.mining:
             self.collect()
         else:
-            if Game.spawns['Spawn1'].store.getFreeCapacity(RESOURCE_ENERGY) > 0:
+            if len(self.obj.room.find(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS)) > 0:
                 self.fill_spawn()
             elif self.obj.room.controller.level < 2 or self.obj.room.controller.ticksToDowngrade < 1000:
                 self.upgrade_controller()
@@ -41,7 +41,7 @@ class Starter(Creep):
             self.obj.moveTo(target)
 
     def fill_spawn(self):
-        target = Game.spawns['Spawn1']
+        target = self.pos.findClosestByPath(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS)
         code = self.obj.transfer(target, RESOURCE_ENERGY)
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
