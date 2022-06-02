@@ -33,6 +33,7 @@ class Starter(Creep):
         elif self.full() and self.memory.mining:
             self.obj.say('Depositing')
             self.memory.mining = False
+            self._move_away_from_source()
 
     def collect(self):
         target = self.pos.findClosestByPath(FIND_SOURCES_ACTIVE)
@@ -77,3 +78,8 @@ class Starter(Creep):
 
     def empty(self):
         return self.obj.store.getUsedCapacity() == 0
+
+    def _move_away_from_source(self):
+        target = self.pos.findClosestByPath(FIND_SOURCES_ACTIVE)
+        self.obj.say("clearing source")
+        self.obj.moveTo(-(self.pos.x - target.pos.x), -(self.pos.y - target.pos.y))
