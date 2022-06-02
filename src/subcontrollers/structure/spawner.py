@@ -1,5 +1,5 @@
 from ...defs import *
-from utils import get_creeps_of_role
+from ...utils.utils import get_creeps_of_role
 
 from subcontrollers.creep.starter import Starter
 

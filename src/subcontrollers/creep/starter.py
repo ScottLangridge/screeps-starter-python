@@ -1,6 +1,6 @@
 from ...defs import *
 from ...subcontrollers.creep.creep import Creep
-
+from ...utils import filters
 
 class Starter(Creep):
     SPAWN_CAP = 9
@@ -16,11 +16,13 @@ class Starter(Creep):
             self.collect()
         else:
             if Game.spawns['Spawn1'].store.getFreeCapacity(RESOURCE_ENERGY) > 0:
-                self.fill_spawjn()
+                self.fill_spawn()
             elif self.obj.room.controller.level < 2 or self.obj.room.controller.ticksToDowngrade < 1000:
                 self.upgrade_controller()
             elif len(self.obj.room.find(FIND_MY_CONSTRUCTION_SITES)) > 0:
                 self.build()
+            elif len(self.obj.room.find(FIND_STRUCTURES, filters.FILTER_DAMAGED_PASSIVE_DEFENCES)) > 0:
+                self.repair_defences()
             else:
                 self.upgrade_controller()
 
@@ -56,9 +58,11 @@ class Starter(Creep):
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
 
-    # todo Implement
-    def repair(self):
-        pass
+    def repair_defences(self):
+        target = _.min(self.obj.room.find(FIND_STRUCTURES, filters.FILTER_DAMAGED_PASSIVE_DEFENCES), lambda x: x.hits)
+        code = self.obj.repair(target)
+        if code == ERR_NOT_IN_RANGE:
+            self.obj.moveTo(target)
 
     def get_target(self):
         spawn = Game.spawns['Spawn1']
