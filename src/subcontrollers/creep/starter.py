@@ -81,5 +81,6 @@ class Starter(Creep):
 
     def _move_away_from_source(self):
         target = self.pos.findClosestByPath(FIND_SOURCES_ACTIVE)
-        self.obj.say("clearing source")
-        self.obj.moveTo(-(self.pos.x - target.pos.x), -(self.pos.y - target.pos.y))
+        delta_x = self.pos.x - target.pos.x
+        delta_y = self.pos.y - target.pos.y
+        self.obj.moveTo(self.pos.x + delta_x, self.pos.y + delta_y)
