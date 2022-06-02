@@ -3,7 +3,7 @@ from ...subcontrollers.creep.creep import Creep
 
 
 class Starter(Creep):
-    SPAWN_CAP = 5
+    SPAWN_CAP = 10
     DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
     DEFAULT_MEMORY = {'collecting': True}
 
@@ -36,4 +36,9 @@ class Starter(Creep):
             self.obj.moveTo(target)
 
     def get_target(self):
-        return Game.spawns['Spawn1']
+        spawn = Game.spawns['Spawn1']
+        controller = self.obj.room.controller
+        if spawn.energy < spawn.energyCapacity:
+            return spawn
+        else:
+            return controller
