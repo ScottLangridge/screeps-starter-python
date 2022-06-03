@@ -3,7 +3,7 @@ from ...subcontrollers.creep.creep import Creep
 from ...utils import filters
 
 class Starter(Creep):
-    SPAWN_CAP = 9
+    SPAWN_CAP = 1
     DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
     DEFAULT_MEMORY = {'mining': True}
 

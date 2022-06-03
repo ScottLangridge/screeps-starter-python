@@ -3,6 +3,7 @@ from defs import *
 from subcontrollers.structure.spawner import Spawner
 from subcontrollers.creep.starter import Starter
 from subcontrollers.creep.static_miner import StaticMiner
+from subcontrollers.creep.builder import Builder
 
 __pragma__('noalias', 'name')
 __pragma__('noalias', 'undefined')
@@ -43,3 +44,5 @@ def get_creep_from_name(creep):
         return Starter(creep)
     if prefix == 'StaticMiner':
         return StaticMiner(creep)
+    if prefix == 'Builder':
+        return Builder(creep)
