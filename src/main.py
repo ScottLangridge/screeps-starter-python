@@ -25,12 +25,18 @@ def main():
     memory_cleanup()
     [spawner.run() for spawner in get_spawners()]
     [creep.run() for creep in get_creeps()]
+    spend_suprlus_cpu()
 
 
 def memory_cleanup():
     for creep in Object.keys(Memory.creeps):
         if not (creep in Game.creeps):
             del Memory.creeps[creep]
+
+
+def spend_surplus_cpu():
+    if Game.cpu.bucket == 10000:
+        Game.cpu.generatePixel()
 
 
 module.exports.loop = main
