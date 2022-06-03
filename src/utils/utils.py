@@ -2,6 +2,7 @@ from defs import *
 
 from subcontrollers.structure.spawner import Spawner
 from subcontrollers.creep.starter import Starter
+from subcontrollers.creep.hauler import Hauler
 from subcontrollers.creep.static_miner import StaticMiner
 from subcontrollers.creep.builder import Builder
 
@@ -42,6 +43,8 @@ def get_creep_from_name(creep):
     prefix = creep.split('_')[0]
     if prefix == 'Starter':
         return Starter(creep)
+    if prefix == 'Hauler':
+        return Hauler(creep)
     if prefix == 'StaticMiner':
         return StaticMiner(creep)
     if prefix == 'Builder':

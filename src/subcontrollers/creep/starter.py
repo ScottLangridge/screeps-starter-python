@@ -2,8 +2,9 @@ from ...defs import *
 from ...subcontrollers.creep.creep import Creep
 from ...utils import filters
 
+
 class Starter(Creep):
-    SPAWN_CAP = 1
+    SPAWN_CAP = 0
     DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
     DEFAULT_MEMORY = {'mining': True}
 
@@ -28,10 +29,8 @@ class Starter(Creep):
 
     def decide_task(self):
         if self.empty() and not self.memory.mining:
-            self.obj.say('Mining')
             self.memory.mining = True
         elif self.full() and self.memory.mining:
-            self.obj.say('Depositing')
             self.memory.mining = False
             self._move_away_from_source()
 
@@ -64,14 +63,6 @@ class Starter(Creep):
         code = self.obj.repair(target)
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
-
-    def get_target(self):
-        spawn = Game.spawns['Spawn1']
-        controller = self.obj.room.controller
-        if spawn.energy < spawn.energyCapacity:
-            return spawn
-        else:
-            return controller
 
     def full(self):
         return self.obj.store.getFreeCapacity() == 0
