@@ -25,6 +25,7 @@ class StaticMiner(Creep):
     def run(self):
         if self.memory.station == undefined:
             self._assign_station()
+            return
 
         if not self.pos.isEqualTo(self.station[0], self.station[1]):
             self.obj.moveTo(self.station[0], self.station[1])
