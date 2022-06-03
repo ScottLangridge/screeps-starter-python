@@ -4,8 +4,6 @@
 
 from defs import *
 from utils.utils import *
-from subcontrollers.creep.starter import Starter
-from subcontrollers.creep.static_miner import StaticMiner
 
 # These are currently required for Transcrypt in order to use the following names in JavaScript.
 # Without the 'noalias' pragma, each of the following would be translated into something like 'py_Infinity' or

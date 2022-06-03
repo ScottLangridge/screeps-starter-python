@@ -5,6 +5,7 @@ from subcontrollers.creep.starter import Starter
 from subcontrollers.creep.hauler import Hauler
 from subcontrollers.creep.static_miner import StaticMiner
 from subcontrollers.creep.builder import Builder
+from subcontrollers.creep.upgrader import Upgrader
 
 __pragma__('noalias', 'name')
 __pragma__('noalias', 'undefined')
@@ -49,3 +50,5 @@ def get_creep_from_name(creep):
         return StaticMiner(creep)
     if prefix == 'Builder':
         return Builder(creep)
+    if prefix == 'Upgrader':
+        return Upgrader(creep)

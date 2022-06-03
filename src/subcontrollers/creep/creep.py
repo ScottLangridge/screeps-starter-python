@@ -11,6 +11,7 @@ __pragma__('noalias', 'set')
 __pragma__('noalias', 'type')
 __pragma__('noalias', 'update')
 
+
 class Creep:
     SPAWN_CAP = 0
     DEFAULT_BODY = [MOVE, MOVE, WORK, CARRY, CARRY]
