@@ -11,3 +11,9 @@ FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS = {
 FILTER_CONTAINERS = {
     'filter': lambda s: s.structureType == STRUCTURE_CONTAINER
 }
+
+
+def filter_container_with_resource_quantity(resource, min_quantity):
+    return {
+       'filter': lambda s: s.structureType == STRUCTURE_CONTAINER and s.store.getUsedCapacity(resource) >= min_quantity
+    }
