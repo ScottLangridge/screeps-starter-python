@@ -2,6 +2,7 @@ from defs import *
 
 from subcontrollers.structure.spawner import Spawner
 from subcontrollers.creep.starter import Starter
+from subcontrollers.creep.static_miner import StaticMiner
 
 __pragma__('noalias', 'name')
 __pragma__('noalias', 'undefined')
@@ -23,9 +24,7 @@ def get_spawners():
 def get_creeps():
     creeps = []
     for creep in Object.keys(Game.creeps):
-        prefix = creep.split('_')[0]
-        if prefix == 'Starter':
-            creeps.append(Starter(creep))
+        creeps.append(get_creep_from_name(creep))
     return creeps
 
 
@@ -34,5 +33,13 @@ def get_creeps_of_role(role):
     for creep in Object.keys(Game.creeps):
         prefix = creep.split('_')[0]
         if prefix == role.__name__:
-            creeps.append(role(creep))
+            creeps.append(get_creep_from_name(creep))
     return creeps
+
+
+def get_creep_from_name(creep):
+    prefix = creep.split('_')[0]
+    if prefix == 'Starter':
+        return Starter(creep)
+    if prefix == 'StaticMiner':
+        return StaticMiner(creep)

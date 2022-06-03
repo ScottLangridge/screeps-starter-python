@@ -2,6 +2,7 @@ from ...defs import *
 from ...utils.utils import get_creeps_of_role
 
 from subcontrollers.creep.starter import Starter
+from subcontrollers.creep.static_miner import StaticMiner
 
 
 class Spawner:
@@ -11,9 +12,9 @@ class Spawner:
 
     def run(self):
         if self.obj.spawning is None:
-            for role in [Starter]:
+            for role in [Starter, StaticMiner]:
                 if len(get_creeps_of_role(role)) < role.SPAWN_CAP:
-                    self._spawn_creep(role.DEFAULT_BODY, Starter)
+                    self._spawn_creep(role.DEFAULT_BODY, role)
 
 
     def _spawn_creep(self, body, role):
