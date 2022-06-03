@@ -25,7 +25,7 @@ def main():
     memory_cleanup()
     [spawner.run() for spawner in get_spawners()]
     [creep.run() for creep in get_creeps()]
-    spend_suprlus_cpu()
+    spend_surplus_cpu()
 
 
 def memory_cleanup():
