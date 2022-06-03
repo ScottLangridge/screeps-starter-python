@@ -24,7 +24,6 @@ class Hauler(Creep):
             self.memory.refilling = True
         elif self.full() and self.memory.refilling:
             self.memory.refilling = False
-            self._move_away_from_source()
 
     def fill_spawn(self):
         target = self.pos.findClosestByPath(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS)
