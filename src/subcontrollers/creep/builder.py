@@ -4,7 +4,7 @@ from ...utils import filters
 
 
 class Builder(Creep):
-    SPAWN_CAP = 8
+    SPAWN_CAP = 4
     DEFAULT_BODY = [MOVE, MOVE, CARRY, CARRY, WORK, WORK]
     DEFAULT_MEMORY = {'refilling': True}
 

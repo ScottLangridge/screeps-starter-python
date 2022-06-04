@@ -35,15 +35,21 @@ class StaticMiner(Creep):
     def _assign_station(self):
         sources = self.obj.room.find(FIND_SOURCES)
         for source in sources:
+            print("sid:", source.id)
             source_taken = False
             for creep in utils.get_creeps_of_role(StaticMiner):
+                print("cname:", creep.obj.name)
+                print("csource:", creep.memory.source)
                 if creep.memory.source == source.id:
                     source_taken = True
 
+            print("taken:", source_taken)
             if not source_taken:
                 adjacent_containers = source.pos.findInRange(FIND_STRUCTURES, 1, filters.FILTER_CONTAINERS)
+                print("containers:", adjacent_containers)
                 if len(adjacent_containers) > 0:
                     station = adjacent_containers[0].pos
+                    print("assigning container:", adjacent_containers[0].id)
                     self.memory.station = [station.x, station.y]
                     self.memory.source = source.id
                     return
