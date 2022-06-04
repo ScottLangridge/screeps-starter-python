@@ -16,6 +16,10 @@ FILTER_CONTAINERS = {
     'filter': lambda s: s.structureType == STRUCTURE_CONTAINER
 }
 
+FILTER_TOWERS = {
+    'filter': lambda s: s.structureType == STRUCTURE_TOWER
+}
+
 
 def filter_container_with_resource_quantity(resource, min_quantity):
     return {

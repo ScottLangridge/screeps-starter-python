@@ -18,6 +18,8 @@ class Hauler(Creep):
         else:
             if len(self.obj.room.find(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS)) > 0:
                 self.fill_spawn()
+            else:
+                self.fill_towers()
 
     def decide_task(self):
         if self.empty() and not self.memory.refilling:
@@ -27,6 +29,12 @@ class Hauler(Creep):
 
     def fill_spawn(self):
         target = self.pos.findClosestByPath(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_SPAWNS_AND_EXTENSIONS)
+        code = self.obj.transfer(target, RESOURCE_ENERGY)
+        if code == ERR_NOT_IN_RANGE:
+            self.obj.moveTo(target)
+
+    def fill_towers(self):
+        target = _.min(self.obj.room.find(FIND_MY_STRUCTURES, filters.FILTER_TOWERS), lambda x: x.store.getUsedCapacity(RESOURCE_ENERGY))
         code = self.obj.transfer(target, RESOURCE_ENERGY)
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
