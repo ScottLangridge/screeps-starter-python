@@ -23,6 +23,7 @@ def main():
     memory_cleanup()
     [spawner.run() for spawner in get_spawners()]
     [creep.run() for creep in get_creeps()]
+    [tower.run() for tower in get_my_towers()]
     spend_surplus_cpu()
 
 

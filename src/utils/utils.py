@@ -1,6 +1,7 @@
 from defs import *
 
 from subcontrollers.structure.spawner import Spawner
+from subcontrollers.structure.tower import Tower
 from subcontrollers.creep.starter import Starter
 from subcontrollers.creep.hauler import Hauler
 from subcontrollers.creep.static_miner import StaticMiner
@@ -29,6 +30,15 @@ def get_creeps():
     for creep in Object.keys(Game.creeps):
         creeps.append(get_creep_from_name(creep))
     return creeps
+
+
+# toOptimise: This runs every tick.
+def get_my_towers():
+    towers = []
+    for s_id in Object.keys(Game.structures):
+        if Game.getObjectById(s_id).structureType == STRUCTURE_TOWER:
+            towers.append(Tower(s_id))
+    return towers
 
 
 def get_creeps_of_role(role):
