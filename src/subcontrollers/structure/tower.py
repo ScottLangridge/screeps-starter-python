@@ -1,4 +1,5 @@
 from ...defs import *
+from config import TOWERS_REPAIR_PASSIVE_DEFENCES
 
 from subcontrollers.structure.structure import Structure
 from utils import filters
@@ -20,7 +21,7 @@ class Tower(Structure):
     def run(self):
         if self._hostiles_in_room():
             self.attack()
-        elif len(self.obj.room.find(FIND_STRUCTURES, filters.FILTER_DAMAGED_PASSIVE_DEFENCES)) > 0:
+        elif TOWERS_REPAIR_PASSIVE_DEFENCES and len(self.obj.room.find(FIND_STRUCTURES, filters.FILTER_DAMAGED_PASSIVE_DEFENCES)) > 0:
             self.repair_defences()
         else:
             self.repair_infrastructure()
