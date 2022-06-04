@@ -20,6 +20,10 @@ FILTER_TOWERS = {
     'filter': lambda s: s.structureType == STRUCTURE_TOWER
 }
 
+FILTER_NON_FULL_TOWERS = {
+    'filter': lambda s: s.structureType == STRUCTURE_TOWER and s.store.getFreeCapacity(RESOURCE_ENERGY) > 0
+}
+
 
 def filter_container_with_resource_quantity(resource, min_quantity):
     return {

@@ -34,7 +34,7 @@ class Hauler(Creep):
             self.obj.moveTo(target)
 
     def fill_towers(self):
-        target = _.min(self.obj.room.find(FIND_MY_STRUCTURES, filters.FILTER_TOWERS), lambda x: x.store.getUsedCapacity(RESOURCE_ENERGY))
+        target = _.min(self.obj.room.find(FIND_MY_STRUCTURES, filters.FILTER_NON_FULL_TOWERS), lambda x: x.store.getUsedCapacity(RESOURCE_ENERGY))
         code = self.obj.transfer(target, RESOURCE_ENERGY)
         if code == ERR_NOT_IN_RANGE:
             self.obj.moveTo(target)
