@@ -10,7 +10,6 @@ from subcontrollers.creep.upgrader import Upgrader
 
 class Spawner:
     def __init__(self, name):
-        self.name = name
         self.obj = Game.spawns[name]
 
     def run(self):
